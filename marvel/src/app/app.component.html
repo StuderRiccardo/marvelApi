@@ -1,2 +1,6 @@
-<h1>Male</h1>
-{{marvelList | json}}
+<div    *ngFor="let m of marvelList.results">
+    <a routerLink="/marvel-name/{{m.name}}">{{m.name}}</a>
+</div>
+
+<router-outlet></router-outlet>
+

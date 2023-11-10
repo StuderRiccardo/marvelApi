@@ -8,6 +8,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
   makeRequest() :Observable<any> {
-    return this.http.get('http://*.marvel.com/apigateway/v1/public/comics?ts=1&apikey=a62aaa915b9f15a07a9a282ea7beb823&hash=188b0ef09e939a6b8ff2c85532395c5e23f1857baa62aaa915b9f15a07a9a282ea7beb823/')
+    return this.http.get('https://gateway.marvel.com:443/v1/public/characters?apikey=a62aaa915b9f15a07a9a282ea7beb823')
+  }
+  stillSee(id: string | null) :Observable<any>{
+    return this.http.get('https://gateway.marvel.com:443/v1/public/characters?apikey=a62aaa915b9f15a07a9a282ea7beb823/'+ id)
   }
 }

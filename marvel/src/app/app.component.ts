@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { ApiService } from './api.service';
 import { Inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Root,Data } from 'src/models/one.model';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,13 +12,14 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'marvel';
-  obs!: Observable<any>
-  marvelList !: any;
+  obs!: Observable<Root>
+  marvelList !: Data;
   constructor(private api : ApiService){
       this.obs = this.api.makeRequest()
       this.obs.subscribe(this.show)
     }
-    show= (data:any)=>{
-      this.marvelList = data.results
+    show= (data:Root)=>{
+      this.marvelList = data.data
+      
     }
 }
