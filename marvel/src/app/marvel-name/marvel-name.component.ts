@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, Data, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,7 +17,20 @@ export class MarvelNameComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.routeObs = this.route.paramMap
-    this.routeObs.subscribe()
+    this.routeObs.subscribe(this.getParam)
   }
-  
+  getParam = (params : ParamMap)=>{
+    let id = params.get('id')
+    this.routeObs = this.api.stillSee(id)
+    console.log(id);
+    
+    if(id != null){
+      this.routeObs.subscribe((data : any)=>
+      {
+        this.marvelList = data;
+        console.log(this.marvelList);
+        
+      })
+    }
+  }
 }
